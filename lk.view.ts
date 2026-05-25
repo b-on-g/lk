@@ -5,6 +5,38 @@ namespace $.$$ {
 	})
 
 	export class $bog_lk extends $.$bog_lk {
+
+		@$mol_mem
+		api_countries_text() {
+			const data = this.$.$mol_gql(
+				this.$.$bog_lk_api_countries_endpoint,
+				this.$.$bog_lk_api_countries.ListCountries,
+				undefined,
+			)
+			return `api countries: ${data?.countries?.length}`
+		}
+
+		@$mol_mem
+		api_pet_text() {
+			const data = this.$.$mol_openapi(
+				this.$.$bog_lk_api_petstore_endpoint,
+				this.$.$bog_lk_api_petstore.getPetById,
+				{ params: { petId: 1 } },
+				this.$.$bog_lk_api_petstore_init,
+			)
+			return `api petstore pet #1: ${data?.name}`
+		}
+
+		@$mol_mem
+		api2_text() {
+			const data = this.$.$mol_gql(
+				this.$.$bog_lk_api2_all_endpoint,
+				this.$.$bog_lk_api2_all.GetCountriesShort,
+				undefined,
+			)
+			return `api2 countries: ${data?.countries?.length}`
+		}
+
 		private share_feedback_timer: $mol_after_timeout | null = null
 
 		@$mol_mem

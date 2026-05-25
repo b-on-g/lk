@@ -1,0 +1,18 @@
+type Country {
+	code: ID!
+	name: String!
+	emoji: String!
+	capital: String
+}
+
+type Query {
+	countries: [Country!]!
+}
+
+query GetCountriesShort {
+	countries {
+		code
+		name
+		emoji
+	}
+}

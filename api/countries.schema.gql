@@ -1,0 +1,31 @@
+type Continent {
+	code: ID!
+	name: String!
+	countries: [Country!]!
+}
+
+type Language {
+	code: ID!
+	name: String
+	native: String
+	rtl: Boolean!
+}
+
+type Country {
+	code: ID!
+	name: String!
+	native: String!
+	capital: String
+	emoji: String!
+	currency: String
+	phone: String!
+	continent: Continent!
+	languages: [Language!]!
+}
+
+type Query {
+	country( code: ID! ): Country
+	countries: [Country!]!
+	continent( code: ID! ): Continent
+	continents: [Continent!]!
+}

@@ -8,6 +8,12 @@ $bog_lk $mol_page
 	profile null
 	can_edit? true
 	body /
+		<= Api_demo $mol_list
+			rows /
+				<= Api_demo_title $mol_text text \API codegen demo
+				<= Api_demo_countries $mol_text text <= api_countries_text \
+				<= Api_demo_pet $mol_text text <= api_pet_text \
+				<= Api_demo_api2 $mol_text text <= api2_text \
 		<= Back $mol_button_minor
 			title @ \Вернуться
 			click? => back_click? \
