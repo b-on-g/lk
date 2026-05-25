@@ -8,7 +8,7 @@ namespace $.$$ {
 
 		@$mol_mem
 		api_countries_text() {
-			const data = this.$.$mol_gql(
+			const data = this.$.$mol_gql.fetch(
 				this.$.$bog_lk_api_countries_endpoint,
 				this.$.$bog_lk_api_countries.ListCountries,
 				undefined,
@@ -18,7 +18,7 @@ namespace $.$$ {
 
 		@$mol_mem
 		api_pet_text() {
-			const data = this.$.$mol_openapi(
+			const data = this.$.$mol_openapi.fetch(
 				this.$.$bog_lk_api_petstore_endpoint,
 				this.$.$bog_lk_api_petstore.getPetById,
 				{ params: { petId: 1 } },
@@ -29,7 +29,7 @@ namespace $.$$ {
 
 		@$mol_mem
 		api2_text() {
-			const data = this.$.$mol_gql(
+			const data = this.$.$mol_gql.fetch(
 				this.$.$bog_lk_api2_all_endpoint,
 				this.$.$bog_lk_api2_all.GetCountriesShort,
 				undefined,
