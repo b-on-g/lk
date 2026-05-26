@@ -8,32 +8,22 @@ namespace $.$$ {
 
 		@$mol_mem
 		api_countries_text() {
-			const data = this.$.$mol_gql.fetch(
-				this.$.$bog_lk_api_countries_endpoint,
-				this.$.$bog_lk_api_countries.ListCountries,
-				undefined,
-			)
+			const data = this.$.$bog_lk_api_countries_client.call( this.$.$bog_lk_api_countries.ListCountries )
 			return `api countries: ${data?.countries?.length}`
 		}
 
 		@$mol_mem
 		api_pet_text() {
-			const data = this.$.$mol_openapi.fetch(
-				this.$.$bog_lk_api_petstore_endpoint,
-				this.$.$bog_lk_api_petstore.getPetById,
-				{ params: { petId: 1 } },
-				this.$.$bog_lk_api_petstore_init,
-			)
+			const data = this.$.$bog_lk_api_petstore_client.call({
+				...this.$.$bog_lk_api_petstore.getPetById,
+				params: { petId: 1 },
+			})
 			return `api petstore pet #1: ${data?.name}`
 		}
 
 		@$mol_mem
 		api2_text() {
-			const data = this.$.$mol_gql.fetch(
-				this.$.$bog_lk_api2_all_endpoint,
-				this.$.$bog_lk_api2_all.GetCountriesShort,
-				undefined,
-			)
+			const data = this.$.$bog_lk_api2_client.call( this.$.$bog_lk_api2_all.GetCountriesShort )
 			return `api2 countries: ${data?.countries?.length}`
 		}
 
