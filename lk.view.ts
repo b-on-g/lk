@@ -4,26 +4,46 @@ namespace $.$$ {
 		$hyoo_crus_glob.yard().sync()
 	})
 
+	// Subclass'ы $mol_gql/$mol_openapi с переопределёнными api_root()/fetchInit().
+	// Они инжектятся в `static $` корневого view — instance.$ getter в $mol_object2
+	// падёт на constructor.$ и весь subtree увидит подменённые операции.
+	class $bog_lk_gql extends $.$mol_gql {
+		static override api_root() { return 'https://countries.trevorblades.com' }
+	}
+
+	class $bog_lk_openapi extends $.$mol_openapi {
+		static override api_root() { return 'https://petstore3.swagger.io/api/v3' }
+		static override fetchInit(): RequestInit {
+			return {
+				headers: { 'api_key': 'special-key', 'accept-language': 'en-US' },
+				credentials: 'omit',
+				cache: 'no-cache',
+			}
+		}
+	}
+
 	export class $bog_lk extends $.$bog_lk {
+
+		static override $ = $mol_ambient({
+			$mol_gql: $bog_lk_gql,
+			$mol_openapi: $bog_lk_openapi,
+		})
 
 		@$mol_mem
 		api_countries_text() {
-			const data = this.$.$bog_lk_api_countries_client.call( this.$.$bog_lk_api_countries.ListCountries )
+			const data = this.$.$mol_gql._.$bog_lk_api_countries_list_countries()
 			return `api countries: ${data?.countries?.length}`
 		}
 
 		@$mol_mem
 		api_pet_text() {
-			const data = this.$.$bog_lk_api_petstore_client.call({
-				...this.$.$bog_lk_api_petstore.getPetById,
-				params: { petId: 1 },
-			})
+			const data = this.$.$mol_openapi._.$bog_lk_api_petstore_get_pet_by_id({ params: { petId: 1 } })
 			return `api petstore pet #1: ${data?.name}`
 		}
 
 		@$mol_mem
 		api2_text() {
-			const data = this.$.$bog_lk_api2_client.call( this.$.$bog_lk_api2_all.GetCountriesShort )
+			const data = this.$.$mol_gql._.$bog_lk_api2_all_get_countries_short()
 			return `api2 countries: ${data?.countries?.length}`
 		}
 
